@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+  <head>
+    <title>Space Shooter</title>
+    <script src='gameObjects/player.js'></script>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    }
+    .canvas-wrapper {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <body onkeydown="clickEvent(event)">
+    <div class="canvas-wrapper">
+      <canvas id="canvas" width="1200" height="600"></canvas>
+    </div>
+    <script>
+      const CANVAS = document.getElementById('canvas');
+      const CANVAS_DIMENSION = {width:CANVAS.width, height:CANVAS.height};
+      const STAGE = CANVAS.getContext('2d');
+      const STAGE_COLOR = '#000';
+      const player = new Player();
+
+      function main() {
+        window.requestAnimationFrame(main);
+        refreshStage();
+        drawGameObjects();
+      }
+
+      function init() {
+        player.init();
+      }
+
+      function refreshStage() {
+        STAGE.fillStyle = STAGE_COLOR;
+        STAGE.fillRect(0,0,CANVAS_DIMENSION.width, CANVAS_DIMENSION.height);
+      }
+
+      function drawGameObjects() {
+        player.draw();
+      }
+
+      window.onload = () => {
+        init();
+        main();
+      }
+    </script>
+  </body>
+</html>
